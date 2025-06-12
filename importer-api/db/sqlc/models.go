@@ -5,73 +5,73 @@
 package db
 
 import (
-	"github.com/jackc/pgx/v5/pgtype"
+	"time"
 )
 
 type FornecedoresDado struct {
-	ID                            int32              `json:"id"`
-	PartnerID                     string             `json:"partner_id"`
-	PartnerName                   string             `json:"partner_name"`
-	CustomerID                    string             `json:"customer_id"`
-	CustomerName                  string             `json:"customer_name"`
-	CustomerDomainName            string             `json:"customer_domain_name"`
-	CustomerCountry               string             `json:"customer_country"`
-	MpnID                         int32              `json:"mpn_id"`
-	Tier2MpnID                    int32              `json:"tier2_mpn_id"`
-	InvoiceNumber                 string             `json:"invoice_number"`
-	ProductID                     string             `json:"product_id"`
-	SkuID                         string             `json:"sku_id"`
-	AvailabilityID                string             `json:"availability_id"`
-	SkuName                       string             `json:"sku_name"`
-	ProductName                   string             `json:"product_name"`
-	PublisherName                 string             `json:"publisher_name"`
-	PublisherID                   string             `json:"publisher_id"`
-	SubscriptionDescription       string             `json:"subscription_description"`
-	SubscriptionID                string             `json:"subscription_id"`
-	ChargeStartDate               pgtype.Timestamptz `json:"charge_start_date"`
-	ChargeEndDate                 pgtype.Timestamptz `json:"charge_end_date"`
-	UsageDate                     pgtype.Timestamptz `json:"usage_date"`
-	MeterType                     string             `json:"meter_type"`
-	MeterCategory                 string             `json:"meter_category"`
-	MeterID                       string             `json:"meter_id"`
-	MeterSubCategory              string             `json:"meter_sub_category"`
-	MeterName                     string             `json:"meter_name"`
-	MeterRegion                   string             `json:"meter_region"`
-	Unit                          string             `json:"unit"`
-	ResourceLocation              string             `json:"resource_location"`
-	ConsumedService               string             `json:"consumed_service"`
-	ResourceGroup                 string             `json:"resource_group"`
-	ResourceUri                   string             `json:"resource_uri"`
-	ChargeType                    string             `json:"charge_type"`
-	UnitPrice                     pgtype.Numeric     `json:"unit_price"`
-	Quantity                      pgtype.Numeric     `json:"quantity"`
-	UnitType                      string             `json:"unit_type"`
-	BillingPreTaxTotal            pgtype.Numeric     `json:"billing_pre_tax_total"`
-	BillingCurrency               string             `json:"billing_currency"`
-	PricingPreTaxTotal            pgtype.Numeric     `json:"pricing_pre_tax_total"`
-	PricingCurrency               string             `json:"pricing_currency"`
-	ServiceInfo1                  string             `json:"service_info1"`
-	ServiceInfo2                  string             `json:"service_info2"`
-	Tags                          string             `json:"tags"`
-	AdditionalInfo                string             `json:"additional_info"`
-	EffectiveUnitPrice            pgtype.Numeric     `json:"effective_unit_price"`
-	PcToBcExchangeRate            pgtype.Numeric     `json:"pc_to_bc_exchange_rate"`
-	PcToBcExchangeRateDate        pgtype.Timestamptz `json:"pc_to_bc_exchange_rate_date"`
-	EntitlementID                 string             `json:"entitlement_id"`
-	EntitlementDescription        string             `json:"entitlement_description"`
-	PartnerEarnedCreditPercentage pgtype.Numeric     `json:"partner_earned_credit_percentage"`
-	CreditPercentage              pgtype.Numeric     `json:"credit_percentage"`
-	CreditType                    string             `json:"credit_type"`
-	BenefitOrderID                string             `json:"benefit_order_id"`
-	BenefitID                     string             `json:"benefit_id"`
-	BenefitType                   string             `json:"benefit_type"`
-	UserID                        int32              `json:"user_id"`
+	ID                            int32
+	PartnerID                     string
+	PartnerName                   string
+	CustomerID                    string
+	CustomerName                  string
+	CustomerDomainName            string
+	CustomerCountry               string
+	MpnID                         int32
+	Tier2MpnID                    int32
+	InvoiceNumber                 string
+	ProductID                     string
+	SkuID                         string
+	AvailabilityID                string
+	SkuName                       string
+	ProductName                   string
+	PublisherName                 string
+	PublisherID                   string
+	SubscriptionDescription       string
+	SubscriptionID                string
+	ChargeStartDate               time.Time
+	ChargeEndDate                 time.Time
+	UsageDate                     time.Time
+	MeterType                     string
+	MeterCategory                 string
+	MeterID                       string
+	MeterSubCategory              string
+	MeterName                     string
+	MeterRegion                   string
+	Unit                          string
+	ResourceLocation              string
+	ConsumedService               string
+	ResourceGroup                 string
+	ResourceUri                   string
+	ChargeType                    string
+	UnitPrice                     string
+	Quantity                      string
+	UnitType                      string
+	BillingPreTaxTotal            string
+	BillingCurrency               string
+	PricingPreTaxTotal            string
+	PricingCurrency               string
+	ServiceInfo1                  string
+	ServiceInfo2                  string
+	Tags                          string
+	AdditionalInfo                string
+	EffectiveUnitPrice            string
+	PcToBcExchangeRate            string
+	PcToBcExchangeRateDate        time.Time
+	EntitlementID                 string
+	EntitlementDescription        string
+	PartnerEarnedCreditPercentage string
+	CreditPercentage              string
+	CreditType                    string
+	BenefitOrderID                string
+	BenefitID                     string
+	BenefitType                   string
+	UserID                        int32
 }
 
 type User struct {
-	ID        int32              `json:"id"`
-	Username  string             `json:"username"`
-	Email     string             `json:"email"`
-	Password  string             `json:"password"`
-	CreatedAt pgtype.Timestamptz `json:"created_at"`
+	ID        int32
+	Username  string
+	Email     string
+	Password  string
+	CreatedAt time.Time
 }

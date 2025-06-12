@@ -14,7 +14,7 @@ SELECT id, partner_id, partner_name, customer_id, customer_name, customer_domain
 `
 
 func (q *Queries) GetFornecedoresById(ctx context.Context, userID int32) (FornecedoresDado, error) {
-	row := q.db.QueryRow(ctx, getFornecedoresById, userID)
+	row := q.db.QueryRowContext(ctx, getFornecedoresById, userID)
 	var i FornecedoresDado
 	err := row.Scan(
 		&i.ID,

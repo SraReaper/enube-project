@@ -2,8 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"enube-project/api"
-	db "enube-project/db/sqlc"
 	"fmt"
 	"log"
 	"os"
@@ -15,39 +13,20 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-const (
-	dbDriver      = "postgres"
-	dbSource      = "postgres://postgres:postgres@localhost:5432/importer_api?sslmode=disable"
-	ServerAddress = "0.0.0.0:8000"
-	excelFile     = "Reconfilefornecedores.xlsx"
-)
-
 func main() {
-	connect, err := sql.Open(dbDriver, dbSource)
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error connecting to the database:", err)
+		log.Fatal("Error loading .env")
 	}
 
-	store := db.NewStore(connect)
-	server := api.NewServer(store)
-
-	err = server.Start(ServerAddress)
-	if err != nil {
-		log.Fatal("Error starting the server:", err)
-	}
-
-	if err := godotenv.Load(); err != nil {
-		log.Println("Error loading .env file, using default environment variables")
-	}
-
-	connImporter := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	conn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),
 		os.Getenv("DB_USER"),
 		os.Getenv("DB_PASSWORD"),
 		os.Getenv("DB_NAME"),
 	)
-	db, err := sql.Open("postgres", connImporter)
+	db, err := sql.Open("postgres", conn)
 	if err != nil {
 		log.Fatal("Error connecting to the db:", err)
 	}
@@ -178,7 +157,7 @@ func main() {
 			val("PricingCurrency"), val("ServiceInfo1"), val("ServiceInfo2"), val("Tags"), val("AdditionalInfo"),
 			getFloat("EffectiveUnitPrice"), getFloat("PCToBCExchangeRate"), getTime("PCToBCExchangeRateDate"),
 			val("EntitlementId"), val("EntitlementDescription"), getFloat("PartnerEarnedCreditPercentage"),
-			getFloat("CreditPercentage"), val("CreditType"), val("BenefitOrderId"), val("BenefitId"), val("BenefitType"), val("UserId"),
+			getFloat("CreditPercentage"), val("CreditType"), val("BenefitOrderId"), val("BenefitId"), val("BenefitType"), 1,
 		)
 
 		if err != nil {

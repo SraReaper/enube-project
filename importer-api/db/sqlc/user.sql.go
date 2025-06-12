@@ -20,13 +20,30 @@ INSERT INTO users (
 `
 
 type CreateUserParams struct {
-	Username string `json:"username"`
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Username string
+	Email    string
+	Password string
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
-	row := q.db.QueryRow(ctx, createUser, arg.Username, arg.Email, arg.Password)
+	row := q.db.QueryRowContext(ctx, createUser, arg.Username, arg.Email, arg.Password)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Email,
+		&i.Password,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
+const getUser = `-- name: GetUser :one
+SELECT id, username, email, password, created_at FROM users WHERE username = $1 LIMIT 1
+`
+
+func (q *Queries) GetUser(ctx context.Context, username string) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUser, username)
 	var i User
 	err := row.Scan(
 		&i.ID,
@@ -43,7 +60,7 @@ SELECT id, username, email, password, created_at FROM users WHERE id = $1 LIMIT 
 `
 
 func (q *Queries) GetUserById(ctx context.Context, id int32) (User, error) {
-	row := q.db.QueryRow(ctx, getUserById, id)
+	row := q.db.QueryRowContext(ctx, getUserById, id)
 	var i User
 	err := row.Scan(
 		&i.ID,

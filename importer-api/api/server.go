@@ -1,7 +1,7 @@
 package api
 
 import (
-	db "enube-project/db/sqlc"
+	db "importer-api/db/sqlc"
 
 	"github.com/gin-gonic/gin"
 )

@@ -8,6 +8,7 @@ import (
 type Store interface {
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	GetUserById(ctx context.Context, id int32) (User, error)
+	GetUser(ctx context.Context, username string) (User, error)
 	GetFornecedoresById(ctx context.Context, id int32) (FornecedoresDado, error)
 }
 
